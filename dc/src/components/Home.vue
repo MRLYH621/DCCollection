@@ -51,7 +51,7 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       menuList: [
         {
@@ -93,9 +93,6 @@ export default {
 .home-container {
   height: 100%;
 }
-.header-nav-img {
-  height: 80%;
-}
 .el-header {
   .header-container {
     margin-left: 0;
@@ -105,7 +102,8 @@ export default {
     font-size: 25px;
     color: #ffffff;
     .header-nav-img {
-      height: 80%;
+      height: 70%;
+      width: 30px;
     }
     span {
       margin-left: 15px;
