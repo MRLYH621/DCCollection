@@ -2,7 +2,7 @@
   <el-container class="home-container">
     <el-header>
       <div class="header-container">
-        <img class="header-nav-img" src="../assets/logo.png" alt="无" />
+        <img class="header-nav-img" src="../assets/logo.jpg" alt="无" />
         <span>电商后台系统</span>
       </div>
     </el-header>
@@ -10,37 +10,41 @@
     <el-container>
       <!-- 侧边栏 -->
       <el-aside width="200px">
-        <el-menu
-          background-color="#373d41"
-          text-color="#ffffff"
-          active-text-color="#409e2ff"
-          :unique-opened="true"
-          router
-          :default-active="this.$route.path"
-        >
-          <el-submenu
-            popper-append-to-body
-            :index="item.path"
-            v-for="item in menuList"
-            :key="item.id"
-          >
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>{{item.name}}</span>
-            </template>
-            <el-menu-item
-              popper-append-to-body="false"
-              v-for="subitem in item.children"
-              :key="subitem.id"
-              :index="subitem.path"
+        <el-row class="tac">
+          <el-col :span="15">
+            <el-menu
+              background-color="#373d41"
+              text-color="#fff"
+              active-text-color="#409eff"
+              unique-opened
+              router
+              :default-active="this.$route.path"
             >
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>{{subitem.name}}</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
-        </el-menu>
+              <el-submenu
+                popper-append-to-body
+                :index="item.path"
+                v-for="item in menuList"
+                :key="item.id"
+              >
+                <template slot="title">
+                  <i class="el-icon-location"></i>
+                  <span>{{item.name}}</span>
+                </template>
+                <el-menu-item
+                  popper-append-to-body="false"
+                  v-for="subitem in item.children"
+                  :key="subitem.id"
+                  :index="subitem.path"
+                >
+                  <template slot="title">
+                    <i class="el-icon-location"></i>
+                    <span>{{subitem.name}}</span>
+                  </template>
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </el-col>
+        </el-row>
       </el-aside>
       <!-- 右侧主体区域 -->
       <el-main>
@@ -56,33 +60,26 @@ export default {
       menuList: [
         {
           id: 1,
-          name: '用户管理',
-          path: '/Welcome',
-          children: [{ id: 6, name: '用户列表', path: '/Welcome' }]
+          name: '电站检测',
+          path: '/SystemMonitor',
+          children: [
+            { id: 4, name: '系统监测', path: '/SystemMonitor' },
+            { id: 5, name: '实时监测', path: '/RealTimeMonitor' },
+            { id: 6, name: '故障列表', path: '/FaultList' },
+            { id: 7, name: '历史报表', path: '/HistoryForm' }
+          ]
         },
         {
           id: 2,
-          name: '权限管理',
-          path: '/quanxian',
-          children: [{ id: 7, name: '222', path: '/quanxian' }]
+          name: '能源分析',
+          path: '/energy',
+          children: [{ id: 8, name: '222', path: '/quanxian' }]
         },
         {
           id: 3,
-          name: '商品管理',
-          path: '/Welcome',
-          children: [{ id: 8, name: '333', path: '/Welcome' }]
-        },
-        {
-          id: 4,
-          name: '订单管理',
-          path: '/Welcome',
-          children: [{ id: 9, name: '111', path: '/Welcome' }]
-        },
-        {
-          id: 5,
-          name: '数据统计',
-          path: '/Welcome',
-          children: [{ id: 10, name: '222', path: '/Welcome' }]
+          name: '用户管理',
+          path: '/UserManager',
+          children: [{ id: 3, name: '用户管理', path: '/UserManager' }]
         }
       ]
     }
@@ -118,6 +115,14 @@ export default {
   background-color: #333744;
   el-menu {
     border-right: none;
+    el-submenu {
+      position: absolute;
+      margin-left: auto;
+      padding: 0 0;
+    }
+    el-menu-item {
+      padding: 0 0;
+    }
   }
 }
 .el-main {
