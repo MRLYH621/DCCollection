@@ -10,18 +10,21 @@
     <el-container>
       <!-- 侧边栏 -->
       <el-aside width="200px">
-        <el-row class="tac">
+        <el-row>
           <el-col :span="15">
             <el-menu
+              :collapse="false"
               background-color="#373d41"
               text-color="#fff"
               active-text-color="#409eff"
               unique-opened
               router
               :default-active="this.$route.path"
+              :collapse-transition="false"
             >
               <el-submenu
-                popper-append-to-body
+                :popper-append-to-body="true"
+                show-timeout="200"
                 :index="item.path"
                 v-for="item in menuList"
                 :key="item.id"
@@ -31,7 +34,6 @@
                   <span>{{item.name}}</span>
                 </template>
                 <el-menu-item
-                  popper-append-to-body="false"
                   v-for="subitem in item.children"
                   :key="subitem.id"
                   :index="subitem.path"
@@ -73,13 +75,17 @@ export default {
           id: 2,
           name: '能源分析',
           path: '/energy',
-          children: [{ id: 8, name: '222', path: '/quanxian' }]
+          children: [
+            { id: 4, name: '能效分析', path: '/Effciency' },
+            { id: 5, name: '发电量分析', path: '/ElectricProductive' },
+            { id: 6, name: '可靠性分析', path: '/Reliability' }
+          ]
         },
         {
           id: 3,
           name: '用户管理',
           path: '/UserManager',
-          children: [{ id: 3, name: '用户管理', path: '/UserManager' }]
+          children: [{ id: 3, name: '用户列表', path: '/UserManager' }]
         }
       ]
     }
@@ -112,20 +118,25 @@ export default {
   justify-content: space-between;
 }
 .el-aside {
-  background-color: #333744;
-  el-menu {
-    border-right: none;
-    el-submenu {
-      position: absolute;
+  background-color: #373d41;
+  .el-menu {
+    border-right: solid 0px;
+    padding-left: 0px;
+    .el-submenu {
       margin-left: auto;
       padding: 0 0;
     }
-    el-menu-item {
-      padding: 0 0;
+    .el-menu-item {
+      position: relative;
     }
   }
 }
 .el-main {
   background-color: #eaedf1;
+}
+.element.style {
+    color: rgb(64, 158, 255);
+    background-color: rgb(55, 61, 65);
+    padding-left: 25px;
 }
 </style>
