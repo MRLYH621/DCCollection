@@ -3,7 +3,7 @@
     <el-header>
       <div class="header-container">
         <img class="header-nav-img" src="../assets/logo.jpg" alt="无" />
-        <span>电商后台系统</span>
+        <span>直流汇集系统</span>
       </div>
     </el-header>
     <!-- 页面主体区域 -->
