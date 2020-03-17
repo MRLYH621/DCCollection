@@ -3,7 +3,7 @@
     <el-header>
       <div class="header-container">
         <img class="header-nav-img" src="../assets/logo.jpg" alt="无" />
-        <span>电商后台系统</span>
+        <span>直流汇集系统</span>
       </div>
     </el-header>
     <!-- 页面主体区域 -->
@@ -74,11 +74,11 @@ export default {
         {
           id: 2,
           name: '能源分析',
-          path: '/energy',
+          path: '/Effciency'',
           children: [
-            { id: 4, name: '能效分析', path: '/Effciency' },
-            { id: 5, name: '发电量分析', path: '/ElectricProductive' },
-            { id: 6, name: '可靠性分析', path: '/Reliability' }
+            { id: 8, name: '能效分析', path: '/Effciency' },
+            { id: 9, name: '发电量分析', path: '/ElectricProductive' },
+            { id: 10, name: '可靠性分析', path: '/Reliability' }
           ]
         },
         {
