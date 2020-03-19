@@ -62,7 +62,7 @@ export default {
       menuList: [
         {
           id: 1,
-          name: '电站检测',
+          name: '电站监测',
           path: '/SystemMonitor',
           children: [
             { id: 4, name: '系统监测', path: '/SystemMonitor' },
