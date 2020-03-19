@@ -24,7 +24,6 @@
             >
               <el-submenu
                 :popper-append-to-body="true"
-                show-timeout="200"
                 :index="item.path"
                 v-for="item in menuList"
                 :key="item.id"
@@ -74,11 +73,11 @@ export default {
         {
           id: 2,
           name: '能源分析',
-          path: '/energy',
+          path: '/Effciency',
           children: [
-            { id: 4, name: '能效分析', path: '/Effciency' },
-            { id: 5, name: '发电量分析', path: '/ElectricProductive' },
-            { id: 6, name: '可靠性分析', path: '/Reliability' }
+            { id: 8, name: '能效分析', path: '/Effciency' },
+            { id: 9, name: '发电量分析', path: '/ElectricProductive' },
+            { id: 10, name: '可靠性分析', path: '/Reliability' }
           ]
         },
         {
@@ -88,6 +87,16 @@ export default {
           children: [{ id: 3, name: '用户列表', path: '/UserManager' }]
         }
       ]
+    }
+  },
+  created() {
+    this.GetStationInfo()
+  },
+  methods: {
+    GetStationInfo() {
+      this.$http.get('StationInfo/GetStationInfo').then(data => {
+        console.log(data)
+      })
     }
   }
 }
@@ -135,8 +144,8 @@ export default {
   background-color: #eaedf1;
 }
 .element.style {
-    color: rgb(64, 158, 255);
-    background-color: rgb(55, 61, 65);
-    padding-left: 25px;
+  color: rgb(64, 158, 255);
+  background-color: rgb(55, 61, 65);
+  padding-left: 25px;
 }
 </style>

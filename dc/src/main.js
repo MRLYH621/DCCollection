@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import './plugins/element.js'
 import './assets/global.css'
-
+import axios from 'axios'
 Vue.config.productionTip = false
+axios.defaults.baseURL = 'http://localhost:15335/'
+Vue.prototype.$http = axios
 
 new Vue({
   router,
