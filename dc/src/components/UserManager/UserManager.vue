@@ -16,7 +16,7 @@
           <el-button type="primary" @click="dialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
-      <el-table :data="tableData" style="width: 100%" border stripe>
+      <el-table :data="UserList" style="width: 100%" border stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="name" label="姓名" width="180"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
@@ -89,7 +89,7 @@ export default {
       },
       dialogVisible: false,
       total: 4,
-      tableData: [
+      UserList: [
         {
           name: '王小虎',
           email: '307169825@qq.com',
@@ -138,7 +138,15 @@ export default {
       }
     }
   },
+  created() {
+    this.getUserList()
+  },
   methods: {
+    getUserList() {
+      this.$http.get('User/GetAllUser').then(data => {
+        console.log(data)
+      })
+    },
     addDialogClosed() {
       this.$refs.ruleForm.resetFields()
     }
