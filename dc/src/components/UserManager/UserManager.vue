@@ -83,12 +83,12 @@ export default {
   data() {
     return {
       queryinfo: {
-        query: '',
+        query: 'zh',
         pagenum: 1,
         pagesize: 2
       },
       dialogVisible: false,
-      total: 4,
+      total: '',
       UserList: [
         {
           name: '王小虎',
@@ -142,10 +142,11 @@ export default {
     this.getUserList()
   },
   methods: {
-    getUserList() {
-      this.$http.get('User/GetAllUser').then(data => {
-        console.log(data)
+    async getUserList() {
+      const { data: res } = await this.$http.get('User/GetQueryUser', {
+        params: this.queryinfo
       })
+      console.log(res)
     },
     addDialogClosed() {
       this.$refs.ruleForm.resetFields()
