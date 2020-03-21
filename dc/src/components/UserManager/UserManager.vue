@@ -42,6 +42,15 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage4"
+        :page-sizes="[5, 10, 20]"
+        :page-size="5"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="10"
+      ></el-pagination>
     </el-card>
     <el-dialog
       title="添加用户"
@@ -83,12 +92,12 @@ export default {
   data() {
     return {
       queryinfo: {
-        query: 'zh',
+        query: '',
         pagenum: 1,
         pagesize: 2
       },
       dialogVisible: false,
-      total: '',
+      total: 0,
       UserList: [
         {
           name: '王小虎',
@@ -146,6 +155,11 @@ export default {
       const { data: res } = await this.$http.get('User/GetQueryUser', {
         params: this.queryinfo
       })
+      if (res.meta.status !== 200) {
+        return this.$message.error('获取用户列表失败')
+      }
+      this.total = res.data[0]
+      this.UserList = res.data[1]
       console.log(res)
     },
     addDialogClosed() {
