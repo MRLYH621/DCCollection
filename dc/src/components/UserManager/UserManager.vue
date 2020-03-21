@@ -9,14 +9,14 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input placeholder="请输入内容" v-model="queryinfo.query" clearable @clear="getUserList">
-            <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="getUserList">查询</el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="dialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
-      <el-table :data="UserList" style="width: 100%  height:50%" border stripe>
+      <el-table :data="UserList" style="width: 100% " border stripe  >
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="UserName" label="用户名" width="180"></el-table-column>
         <el-table-column prop="Email" label="邮箱"></el-table-column>
