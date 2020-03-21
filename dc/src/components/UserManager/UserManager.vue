@@ -88,7 +88,7 @@ export default {
         pagesize: 2
       },
       dialogVisible: false,
-      total: 4,
+      total: 0,
       UserList: [
         {
           name: '王小虎',
@@ -143,9 +143,13 @@ export default {
   },
   methods: {
     getUserList() {
-      this.$http.get('User/GetAllUser').then(data => {
-        console.log(data)
-      })
+      this.$http
+        .get('User/GetQueryUser', {
+          params: this.queryinfo
+        })
+        .then(data => {
+          console.log(data)
+        })
     },
     addDialogClosed() {
       this.$refs.ruleForm.resetFields()
