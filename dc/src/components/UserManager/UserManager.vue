@@ -16,14 +16,14 @@
           <el-button type="primary" @click="dialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
-      <el-table :data="UserList" style="width: 100%" border stripe>
+      <el-table :data="UserList" style="width: 100%  height:50%" border stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="email" label="邮箱"></el-table-column>
-        <el-table-column prop="role" label="角色"></el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column prop="UserName" label="用户名" width="180"></el-table-column>
+        <el-table-column prop="Email" label="邮箱"></el-table-column>
+        <el-table-column prop="RoleName" label="角色"></el-table-column>
+        <el-table-column prop="IsUsing" label="状态">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.state" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+            <el-switch v-model="scope.row.IsUsing" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
           </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -49,7 +49,7 @@
         :page-sizes="[5, 10, 20]"
         :page-size="queryinfo.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="10"
+        :total="total"
       ></el-pagination>
     </el-card>
     <el-dialog
@@ -67,13 +67,13 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="用户名" prop="username">
+        <el-form-item label="用户名" prop="Username">
           <el-input v-model="addForm.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="addForm.password"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
+        <el-form-item label="邮箱" prop="<Email">
           <el-input v-model="addForm.email"></el-input>
         </el-form-item>
         <el-form-item label="手机" prop="telephone">
@@ -94,33 +94,11 @@ export default {
       queryinfo: {
         query: '',
         pagenum: 1,
-        pagesize: 2
+        pagesize: 5
       },
       dialogVisible: false,
       total: 0,
-      UserList: [
-        {
-          name: '王小虎',
-          email: '307169825@qq.com',
-          telephone: 13922584456,
-          role: '系统管理员',
-          sstatus: true
-        },
-        {
-          name: '王小虎',
-          email: '307169825@qq.com',
-          telephone: 13922584456,
-          role: '系统管理员',
-          status: true
-        },
-        {
-          name: '王小虎',
-          email: '307169825@qq.com',
-          telephone: 13922584456,
-          role: '系统管理员',
-          status: true
-        }
-      ],
+      UserList: [],
       addForm: {
         username: '',
         password: '',
@@ -155,12 +133,13 @@ export default {
       const { data: res } = await this.$http.get('User/GetQueryUser', {
         params: this.queryinfo
       })
-      if (res.meta.status !== 200) {
-        return this.$message.error('获取用户列表失败')
-      }
-      this.total = res.data[0]
-      this.UserList = res.data[1]
-      console.log(res)
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error('获取用户列表失败')
+      // }
+      this.total = res[0]
+      this.queryinfo.pagenum = res[1]
+      this.UserList = res[2]
+      console.log(this.UserList)
     },
     handleSizeChange(newsize) {
       this.queryinfo.pagesize = newsize
