@@ -45,9 +45,9 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
+        :current-page="queryinfo.pagenum"
         :page-sizes="[5, 10, 20]"
-        :page-size="5"
+        :page-size="queryinfo.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="10"
       ></el-pagination>
@@ -161,6 +161,14 @@ export default {
       this.total = res.data[0]
       this.UserList = res.data[1]
       console.log(res)
+    },
+    handleSizeChange(newsize) {
+      this.queryinfo.pagesize = newsize
+      this.getUserList()
+    },
+    handleCurrentChange(newpage) {
+      this.queryinfo.pagenum = newpage
+      this.getUserList()
     },
     addDialogClosed() {
       this.$refs.ruleForm.resetFields()
