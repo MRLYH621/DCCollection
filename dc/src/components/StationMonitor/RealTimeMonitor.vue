@@ -5,7 +5,7 @@
       <el-breadcrumb-item>电站监测</el-breadcrumb-item>
       <el-breadcrumb-item>实时监测</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-card>
+    <el-card style="height:135px">
       <el-row :gutter="4">
         <el-col :span="2">
           <div class="grid-content bg-purple">
@@ -117,7 +117,8 @@
         </el-col>
       </el-row>
       <el-row></el-row>
-    </el-card>
+    </el-card >
+    <el-card  style="margin-top:5px"></el-card>
   </div>
 </template>
 <script>

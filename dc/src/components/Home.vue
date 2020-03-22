@@ -30,7 +30,7 @@
               >
                 <template slot="title">
                   <i class="el-icon-location"></i>
-                  <span>{{item.name}}</span>
+                  <span class="el-submenu-text"> {{item.name}}</span>
                 </template>
                 <el-menu-item
                   v-for="subitem in item.children"
@@ -115,9 +115,9 @@ export default {
     color: #ffffff;
     .header-nav-img {
       height: 70%;
-      width: 30px;
+      width: 40px;
     }
-    span {
+    .span {
       margin-left: 15px;
     }
   }
@@ -131,12 +131,16 @@ export default {
   .el-menu {
     border-right: solid 0px;
     padding-left: 0px;
-    .el-submenu {
+    .el-menu {
       margin-left: auto;
       padding: 0 0;
+      font-size: 16px;
     }
     .el-menu-item {
       position: relative;
+    }
+    .el-submenu-text {
+      font-size: 17px;
     }
   }
 }
