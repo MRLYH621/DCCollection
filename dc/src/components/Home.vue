@@ -30,7 +30,7 @@
               >
                 <template slot="title">
                   <i class="el-icon-location"></i>
-                  <span class="el-submenu-text"> {{item.name}}</span>
+                  <span class="el-submenu-text">{{item.name}}</span>
                 </template>
                 <el-menu-item
                   v-for="subitem in item.children"
