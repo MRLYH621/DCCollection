@@ -117,12 +117,27 @@
         </el-col>
       </el-row>
       <el-row></el-row>
-    </el-card >
-    <el-card  style="margin-top:5px"></el-card>
+    </el-card>
+    <el-card style="margin-top:5px">图表</el-card>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  created() {},
+  mounted() {
+    this.GetPowerData()
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    GetPowerData() {
+      this.$http.get('StationData/GetTodayStationData').then(data => {
+        console.log(data)
+      })
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .body-img {
