@@ -1,10 +1,19 @@
 <template>
   <div>
-    <p>可靠性分析</p>
+    <el-input v-model="input" placeholder="请输入内容"></el-input>
+    <el-button type="primary">
+      <a :href="input" target="blank">点赞</a>
+    </el-button>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
 </script>
-<style lang="" scoped>
+<style lang="less" scoped>
 </style>

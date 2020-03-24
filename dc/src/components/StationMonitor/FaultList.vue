@@ -8,17 +8,21 @@
     <el-card class="box-card">
       <el-row :gutter="0" style="margin-left:0px">
         <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card-left">
-              <el-form ref="form" v-for="item in FaultEquipList" :key="item.id" label-width="80px">
-                <el-form-item style="margin:0px">
-                  <el-badge :value="12" class="item">
-                    <el-button type="text" size="medium" class="item-left">{{item.equipName}}</el-button>
-                  </el-badge>
-                </el-form-item>
-              </el-form>
-            </el-card>
-          </div>
+          <el-card class="box-card-left">
+            <el-form
+              class="form-left"
+              ref="form"
+              v-for="item in FaultEquipList"
+              :key="item.id"
+              label-width="80px"
+            >
+              <el-form-item style="margin:0px">
+                <el-badge :value="12" class="item">
+                  <el-button type="text" size="medium" class="item-left">{{item.equipName}}</el-button>
+                </el-badge>
+              </el-form-item>
+            </el-form>
+          </el-card>
         </el-col>
         <el-col :span="18">
           <div class="grid-content bg-purple">
@@ -145,18 +149,25 @@ export default {
 </script>
 <style lang="less" scoped>
 .box-card {
+  padding: 0px !important;
+}
+.form-left {
+  position: relative;
+  top: 0px;
 }
 .box-card-left {
   position: relative;
   left: 5px;
   width: 200px;
+  height: 1200px;
   .item-left {
     width: 120px;
     height: 30px;
     text-align: center;
     font-size: 14px;
     position: absolute;
-    left: -120px;
+    left: -110px;
+    top: -10px;
     border-bottom-color: #eaedf1;
   }
 }
