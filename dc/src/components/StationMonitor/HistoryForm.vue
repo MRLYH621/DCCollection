@@ -59,7 +59,8 @@ export default {
   data() {
     return {
       queryinfo: {
-        query: '',
+        starttime: '',
+        endtime: '',
         pagenum: 1,
         pagesize: 5
       },
@@ -99,6 +100,15 @@ export default {
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    GetStaLSData() {
+      this.$http
+        // .get('StationData/GetLSStationData', { params: queryinfo })
+        .then(res => {
+          console.log(res)
+        })
     }
   }
 }
