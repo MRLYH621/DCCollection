@@ -23,6 +23,9 @@
 </template>
 <script>
 export default {
+  created() {
+    this.Learn()
+  },
   data() {
     return {
       form: {
@@ -50,6 +53,13 @@ export default {
       this.$refs.logininstance.validate(OK => {
         console.log(OK)
       })
+    },
+    Learn() {
+      var arr = []
+      const obj = {}
+      console.log(arr)
+      console.dir(arr.__proto__)
+      console.dir(obj)
     }
   }
 }
