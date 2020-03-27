@@ -12,13 +12,13 @@
             <el-form
               class="form-left"
               ref="form"
-              v-for="item in FaultEquipList"
+              v-for="item in FaultNumList"
               :key="item.id"
               label-width="80px"
             >
               <el-form-item style="margin:0px">
-                <el-badge :value="12" class="item">
-                  <el-button type="text" size="medium" class="item-left">{{item.equipName}}</el-button>
+                <el-badge :value="item.num" class="item">
+                  <el-button type="text" size="medium" class="item-left">{{item.EqName}}</el-button>
                 </el-badge>
               </el-form-item>
             </el-form>
@@ -29,10 +29,10 @@
             <el-card class="box-card-right">
               <el-table :data="UserList" style="width:100% " border stripe>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column prop="UserName" label="用户名" width="180"></el-table-column>
-                <el-table-column prop="Email" label="邮箱"></el-table-column>
-                <el-table-column prop="RoleName" label="角色"></el-table-column>
-                <el-table-column prop="IsUsing" label="状态">
+                <el-table-column prop="UserName" label="故障发生时间" width="180"></el-table-column>
+                <el-table-column prop="Email" label="故障恢复时间"></el-table-column>
+                <el-table-column prop="RoleName" label="故障级别"></el-table-column>
+                <el-table-column prop="IsUsing" label="故障名称">
                   <template slot-scope="scope">
                     <el-switch
                       v-model="scope.row.IsUsing"
@@ -75,18 +75,12 @@
 </template>
 <script>
 export default {
+  created() {
+    this.GetAllFaultInfo()
+  },
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      },
+      FaultNumList: [],
       FaultEquipList: [
         { id: 1, equipName: '设备名称' },
         { id: 2, equipName: '设备名称' },
@@ -107,42 +101,23 @@ export default {
         pagenum: 1,
         pagesize: 5
       },
-      dialogVisible: false,
-      total: 0,
-      UserList: [
-        { UserName: '1' },
-        { UserName: '2' },
-        { UserName: '3' },
-        { UserName: '4' },
-        { UserName: '5' },
-        { UserName: '6' },
-        { UserName: '4' },
-        { UserName: '5' }
-      ],
-      addForm: {
-        username: '',
-        password: '',
-        email: '',
-        telephone: ''
-      },
-      rules: {
-        username: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        email: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        telephone: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ]
-      }
+      total: 0
+    }
+  },
+  methods: {
+    GetAllFaultInfo() {
+      this.$http.get('/Fault/GetFaultByEquip').then(res => {
+        this.FaultNumList = res.data
+        console.log(res)
+      })
+    },
+    handleSizeChange(newpagesize) {
+      this.queryinfo.pagesize = newpagesize
+      this.GetStaLSData()
+    },
+    handleCurrentChange(newpagenum) {
+      this.queryinfo.pagenum = newpagenum
+      this.GetStaLSData()
     }
   }
 }

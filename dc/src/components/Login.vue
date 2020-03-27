@@ -23,9 +23,7 @@
 </template>
 <script>
 export default {
-  created() {
-    this.Learn()
-  },
+  created() {},
   data() {
     return {
       form: {
@@ -51,15 +49,11 @@ export default {
     },
     login() {
       this.$refs.logininstance.validate(OK => {
-        console.log(OK)
+        if (OK !== true) {
+          return this.$message.error('请正确填写账号密码')
+        }
+        this.$router.push({ path: './SystemMonitor' })
       })
-    },
-    Learn() {
-      var arr = []
-      const obj = {}
-      console.log(arr)
-      console.dir(arr.__proto__)
-      console.dir(obj)
     }
   }
 }

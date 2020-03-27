@@ -6,21 +6,12 @@
       <el-breadcrumb-item>历史报表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-row :gutter="20">
-        <el-col :span="8">
-          <el-input placeholder="请输入内容" v-model="queryinfo.query" clearable @clear="getUserList">
-            <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
-          </el-input>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="dialogVisible=true">添加用户</el-button>
-        </el-col>
-      </el-row>
-      <el-table :data="UserList" style="width:100%  " border stripe>
+      <el-row :gutter="20"></el-row>
+      <el-table :data="staLSList" style="width:100%  " border stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="UserName" label="用户名" width="180"></el-table-column>
-        <el-table-column prop="Email" label="邮箱"></el-table-column>
-        <el-table-column prop="RoleName" label="角色"></el-table-column>
+        <el-table-column prop="DZZ_Parm_008" label="功率" width="180"></el-table-column>
+        <el-table-column prop="parm_002" label="邮箱"></el-table-column>
+        <el-table-column prop="parm_006" label="时间"></el-table-column>
         <el-table-column prop="IsUsing" label="状态">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.IsUsing" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
@@ -56,59 +47,38 @@
 </template>
 <script>
 export default {
+  created() {
+    this.GetStaLSData()
+  },
   data() {
     return {
       queryinfo: {
-        starttime: '',
-        endtime: '',
+        starttime: '2020-03-15',
+        endtime: '2020-03-26',
         pagenum: 1,
         pagesize: 5
       },
-      dialogVisible: false,
       total: 0,
-      UserList: [
-        { UserName: '1' },
-        { UserName: '2' },
-        { UserName: '3' },
-        { UserName: '4' },
-        { UserName: '5' },
-        { UserName: '6' },
-        { UserName: '4' },
-        { UserName: '5' }
-      ],
-      addForm: {
-        username: '',
-        password: '',
-        email: '',
-        telephone: ''
-      },
-      rules: {
-        username: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        email: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        telephone: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ]
-      }
+      staLSList: []
     }
   },
   methods: {
     GetStaLSData() {
       this.$http
-        // .get('StationData/GetLSStationData', { params: queryinfo })
+        .get('StationData/GetLSStationData', { params: this.queryinfo })
         .then(res => {
+          this.total = res.data[0]
+          this.staLSList = res.data[1]
           console.log(res)
         })
+    },
+    handleSizeChange(newpagesize) {
+      this.queryinfo.pagesize = newpagesize
+      this.GetStaLSData()
+    },
+    handleCurrentChange(newpagenum) {
+      this.queryinfo.pagenum = newpagenum
+      this.GetStaLSData()
     }
   }
 }
